@@ -1,5 +1,6 @@
 import tkinter as tk
 from collections import deque
+import time 
 
 
 def readlayout():
@@ -34,6 +35,7 @@ def pth_matrix():
     #print(pth_matrix)
 
 def adjacency_list():
+    global mat_all
     mat_all=[]
     global ad_list
     global start_value
@@ -85,20 +87,33 @@ def bfs():
     prev=["" for i in range(len(ad_list))]
     queue.appendleft(start_value)
     visited[start_value]=True
+    a,b=index_2d(mat_all,start_value)
+    _canvas.itemconfig(rectangles[a][b],fill="green")
+    # time.sleep(0.05)
+    #print(i,j)
+
     #print(prev)
 
     while len(queue) != 0:
         node=queue.pop()
+        a,b=index_2d(mat_all,node)
+        _canvas.itemconfig(rectangles[a][b],fill="red")
         neighbours = ad_list[node]
         for i in neighbours:
             if visited[i]==False:
                 queue.appendleft(i)
                 visited[i]=True
+                a,b=index_2d(mat_all,i)
+                _canvas.itemconfig(rectangles[a][b],fill="green")
+                # time.sleep(0.05)
                 prev[i]=node
 
     #print(visited)
 
-
+def index_2d(myList, v):
+    for i, x in enumerate(myList):
+        if v in x:
+            return (i, x.index(v))
 
     pass
 
@@ -143,11 +158,11 @@ pth_matrix()
 
 adjacency_list()
 
-bfs()
 
+bfs()
 #print(layout)
 
 
 
-
+_root_window.update()
 _root_window.mainloop()
