@@ -1,10 +1,16 @@
 import tkinter as tk
 from collections import deque
 import time 
+import os
+
+full_path = os.path.realpath(__file__)
+
+pathx, filename = os.path.split(full_path)
+
 
 
 def readlayout():
-    with open('bigSearch.lay','r') as f:
+    with open(pathx+'\\bigSearch.lay','r') as f:
         conatents=f.readlines()
         global layout
         global x_size
@@ -82,10 +88,11 @@ def adjacency_list():
 
 def bfs():
     global end_value
-    end_value=63
+    end_value=23
     queue=deque()
     visited=[False for i in range(len(ad_list))]
     prev=[0 for i in range(len(ad_list))]
+    #print(prev)
     queue.appendleft(start_value)
     visited[start_value]=True
     a,b=index_2d(mat_all,start_value)
@@ -120,6 +127,7 @@ def bfs():
                 #     return prev
 
 def pathing(prev):
+    #print(prev)
     path=[]
     path.append(end_value)
     for i in range(len(prev)):
@@ -184,6 +192,7 @@ adjacency_list()
 
 
 prev=bfs()
+#print(prev)
 
 pathing(prev)
 #print(layout)
