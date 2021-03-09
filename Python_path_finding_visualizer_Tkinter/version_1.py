@@ -81,10 +81,11 @@ def adjacency_list():
 
 
 def bfs():
-
+    global end_value
+    end_value=63
     queue=deque()
     visited=[False for i in range(len(ad_list))]
-    prev=["" for i in range(len(ad_list))]
+    prev=[0 for i in range(len(ad_list))]
     queue.appendleft(start_value)
     visited[start_value]=True
     a,b=index_2d(mat_all,start_value)
@@ -102,6 +103,9 @@ def bfs():
         _canvas.itemconfig(rectangles[a][b],fill="red")
         time.sleep(0.03)
         _root_window.update()
+
+        if node==end_value:
+            return prev
         neighbours = ad_list[node]
         for i in neighbours:
             if visited[i]==False:
@@ -111,10 +115,24 @@ def bfs():
                 _canvas.itemconfig(rectangles[a][b],fill="green")
                 time.sleep(0.03)
                 _root_window.update()
- 
                 prev[i]=node
+                # if node==end_value:
+                #     return prev
 
-    #print(visited)
+def pathing(prev):
+    path=[]
+    path.append(end_value)
+    for i in range(len(prev)):
+        path.append(prev[int(path[i])])
+    
+    path.reverse()
+    path=[n for n in path if n!= 0]
+    
+    for value in path:
+        a,b=index_2d(mat_all,value)
+        _canvas.itemconfig(rectangles[a][b],fill="yellow")
+        time.sleep(0.2)
+        _root_window.update()
 
 def index_2d(myList, v):
     for i, x in enumerate(myList):
@@ -124,7 +142,7 @@ def index_2d(myList, v):
     pass
 
 def creategrid():
-    global z
+
     global rectangles
     rectangles=[]
     #for i in range(len(layout)):
@@ -165,7 +183,9 @@ pth_matrix()
 adjacency_list()
 
 
-bfs()
+prev=bfs()
+
+pathing(prev)
 #print(layout)
 
 
