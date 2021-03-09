@@ -31,11 +31,13 @@ def pth_matrix():
                 pth_matrix[i].append(0)
 
     #print(layout)
-    print(pth_matrix)
+    #print(pth_matrix)
 
 def adjacency_list():
     mat_all=[]
     global ad_list
+    global start_value
+    start_value = 0
     ad_list=[]
     value=0
     for i in range(y_size):
@@ -44,6 +46,9 @@ def adjacency_list():
             mat_all[i].append(value)
             value+=1
     #print(mat_all)
+    a,b=init_position
+    start_value=mat_all[a][b]
+    print(start_value)
     for i in range(value):
         ad_list.append([])
     for i in range(y_size):
@@ -68,7 +73,8 @@ def adjacency_list():
                     ind_2=mat_all[i][j-1]
                     ad_list[ind_1].append(ind_2)
     for i in range(value):
-        print(i,ad_list[i])    
+        #print(i,ad_list[i])
+        pass    
 
 
 
