@@ -1,5 +1,5 @@
 import tkinter as tk
-
+from collections import deque
 
 
 def readlayout():
@@ -48,7 +48,7 @@ def adjacency_list():
     #print(mat_all)
     a,b=init_position
     start_value=mat_all[a][b]
-    print(start_value)
+    #print(start_value)
     for i in range(value):
         ad_list.append([])
     for i in range(y_size):
@@ -77,6 +77,30 @@ def adjacency_list():
         pass    
 
 
+
+def bfs():
+
+    queue=deque()
+    visited=[False for i in range(len(ad_list))]
+    prev=["" for i in range(len(ad_list))]
+    queue.appendleft(start_value)
+    visited[start_value]=True
+    #print(prev)
+
+    while len(queue) != 0:
+        node=queue.pop()
+        neighbours = ad_list[node]
+        for i in neighbours:
+            if visited[i]==False:
+                queue.appendleft(i)
+                visited[i]=True
+                prev[i]=node
+
+    #print(visited)
+
+
+
+    pass
 
 def creategrid():
     x=0 
@@ -112,6 +136,8 @@ creategrid()
 pth_matrix()
 
 adjacency_list()
+
+bfs()
 
 #print(layout)
 
