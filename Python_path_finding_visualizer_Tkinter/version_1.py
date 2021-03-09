@@ -103,17 +103,23 @@ def bfs():
     pass
 
 def creategrid():
+    global z
+    global rectangles
+    rectangles=[]
+    #for i in range(len(layout)):
+
     x=0 
     y=0 
     w=20
     h=20
-    for rows in layout:
-        for columns in rows:
-            z=_canvas.create_rectangle(x,y,w,h,fill="black",outline="red")
-            if columns=='%':
-                _canvas.itemconfig(z,fill="blue")
-            elif columns=='P':
-                _canvas.itemconfig(z,fill="yellow")
+    for i in range(len(layout)):
+        rectangles.append([])
+        for j in range(len(layout[0])):
+            rectangles[i].append(_canvas.create_rectangle(x,y,w,h,fill="black",outline="red"))
+            if layout[i][j]=='%':
+                _canvas.itemconfig(rectangles[i][j],fill="blue")
+            elif layout[i][j]=='P':
+                _canvas.itemconfig(rectangles[i][j],fill="yellow")
             x=x+20
             w=w+20
         x=0
