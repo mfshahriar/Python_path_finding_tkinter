@@ -1,4 +1,5 @@
 import tkinter as tk
+from tkinter import messagebox 
 from collections import deque
 import time 
 import os
@@ -84,11 +85,17 @@ def adjacency_list():
         #print(i,ad_list[i])
         pass    
 
-
+def setOutput(i,j):
+    global end_value
+    if pth_matrix[i][j]==0:
+        messagebox.showinfo("Position Doesnt exist in path", "Exiting" )
+        exit()
+    else:
+        end_value=mat_all[i][j]
 
 def bfs():
-    global end_value
-    end_value=23
+
+    #end_value=23
     queue=deque()
     visited=[False for i in range(len(ad_list))]
     prev=[0 for i in range(len(ad_list))]
@@ -123,8 +130,8 @@ def bfs():
                 time.sleep(0.03)
                 _root_window.update()
                 prev[i]=node
-                # if node==end_value:
-                #     return prev
+
+    return prev
 
 def pathing(prev):
     #print(prev)
@@ -190,6 +197,7 @@ pth_matrix()
 
 adjacency_list()
 
+setOutput(13,1)
 
 prev=bfs()
 #print(prev)
