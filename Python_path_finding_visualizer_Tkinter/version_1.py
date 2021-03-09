@@ -89,7 +89,9 @@ def bfs():
     visited[start_value]=True
     a,b=index_2d(mat_all,start_value)
     _canvas.itemconfig(rectangles[a][b],fill="green")
-    # time.sleep(0.05)
+    time.sleep(0.03)
+    _root_window.update()
+
     #print(i,j)
 
     #print(prev)
@@ -98,6 +100,8 @@ def bfs():
         node=queue.pop()
         a,b=index_2d(mat_all,node)
         _canvas.itemconfig(rectangles[a][b],fill="red")
+        time.sleep(0.03)
+        _root_window.update()
         neighbours = ad_list[node]
         for i in neighbours:
             if visited[i]==False:
@@ -105,7 +109,9 @@ def bfs():
                 visited[i]=True
                 a,b=index_2d(mat_all,i)
                 _canvas.itemconfig(rectangles[a][b],fill="green")
-                # time.sleep(0.05)
+                time.sleep(0.03)
+                _root_window.update()
+ 
                 prev[i]=node
 
     #print(visited)
@@ -164,5 +170,5 @@ bfs()
 
 
 
-_root_window.update()
+
 _root_window.mainloop()
