@@ -1,18 +1,3 @@
-#Instructions:
-    #Right click initiates the source node
-    #Left click initiates the destination node
-    #########First click on the right mouse button in the grid to initiate a starting node.
-    #########Then click on the left button in the grid to initiate the ending node.BFS algorithm will start and as it reaches the destination node,it will create the shortest path
-    #Right clicking on wall will only show the starting point,since algorithm doesnt traverse through wall nodes,it will not work
-    #Left Clicking on the wall will trigger a message box exiting  the method as walls can not be paths
-    #Left clicking without right clicking will through errror in console as the starting node is not defined
-
-#Group Members:
-
-    #Shahriar, Mohammad Fahim ID: 18-37258-1
-    #Bhuiyan, Md. Aminul Islam ID: 17-34531-2
-    #Antor , Hamid Ahmed ID: 18-36061-1
-    # Z.M. MOHIBUL ISLAM ID: 18-36427-1
 
 import tkinter as tk
 from tkinter import messagebox 
@@ -25,7 +10,6 @@ full_path = os.path.realpath(__file__)
 
 pathx, filename = os.path.split(full_path)
 
-## Antor , Hamid Ahmed ID: 18-36061-1
 
 
 def readlayout():
@@ -60,7 +44,13 @@ def pth_matrix():
     #print(layout)
     #print(pth_matrix)
 
-##Shahriar, Mohammad Fahim ID: 18-37258-1
+
+
+
+def on_key_press(e):
+    new_direction = e.keysym
+    print("Executed")
+    print(new_direction)
 
 def adjacency_list():
     global mat_all
@@ -125,48 +115,48 @@ def rightClicked(event):
                 _canvas.itemconfig(rectangles[i][j],fill="Red")
                 _root_window.update
     
-#Bhuiyan, Md. Aminul Islam ID: 17-34531-2
 
-def bfs():
 
-    #end_value=23
-    queue=deque()
-    visited=[False for i in range(len(ad_list))]
-    prev=[0 for i in range(len(ad_list))]
-    #print(prev)
-    queue.appendleft(start_value)
-    visited[start_value]=True
-    # a,b=index_2d(mat_all,start_value)
-    # _canvas.itemconfig(rectangles[a][b],fill="green2")
-    # time.sleep(0.02)
-    _root_window.update()
+# def bfs():
 
-    #print(i,j)
+#     #end_value=23
+#     queue=deque()
+#     visited=[False for i in range(len(ad_list))]
+#     prev=[0 for i in range(len(ad_list))]
+#     #print(prev)
+#     queue.appendleft(start_value)
+#     visited[start_value]=True
+#     # a,b=index_2d(mat_all,start_value)
+#     # _canvas.itemconfig(rectangles[a][b],fill="green2")
+#     # time.sleep(0.02)
+#     _root_window.update()
 
-    #print(prev)
+#     #print(i,j)
 
-    while len(queue) != 0:
-        node=queue.pop()
-        a,b=index_2d(mat_all,node)
-        _canvas.itemconfig(rectangles[a][b],fill="coral3")
-        time.sleep(0.02)
-        _root_window.update()
+#     #print(prev)
 
-        if node==end_value:
-            return prev
-        neighbours = ad_list[node]
-        for i in neighbours:
-            if visited[i]==False:
-                queue.appendleft(i)
-                visited[i]=True
-                a,b=index_2d(mat_all,i)
-                _canvas.itemconfig(rectangles[a][b],fill="green2")
-                #print(rectangles[0][0])
-                time.sleep(0.02)
-                _root_window.update()
-                prev[i]=node
+#     while len(queue) != 0:
+#         node=queue.pop()
+#         a,b=index_2d(mat_all,node)
+#         _canvas.itemconfig(rectangles[a][b],fill="coral3")
+#         time.sleep(0.02)
+#         _root_window.update()
 
-    return prev
+#         if node==end_value:
+#             return prev
+#         neighbours = ad_list[node]
+#         for i in neighbours:
+#             if visited[i]==False:
+#                 queue.appendleft(i)
+#                 visited[i]=True
+#                 a,b=index_2d(mat_all,i)
+#                 _canvas.itemconfig(rectangles[a][b],fill="green2")
+#                 #print(rectangles[0][0])
+#                 time.sleep(0.02)
+#                 _root_window.update()
+#                 prev[i]=node
+
+#     return prev
 
 def pathing(prev):
     #print(prev)
@@ -184,7 +174,7 @@ def pathing(prev):
         time.sleep(0.02)
         _root_window.update()
 
-##Shahriar, Mohammad Fahim ID: 18-37258-1
+
 
 def index_2d(myList, v):
     for i, x in enumerate(myList):
@@ -209,13 +199,13 @@ def clicked(event):
                 _canvas.itemconfig(rectangles[i][j],fill="purple")
                 _root_window.update
                 setOutput(i,j)
-                prev=bfs()
-                pathing(prev)
-                _canvas.delete(all)
+                # prev=bfs()
+                # pathing(prev)
+                # _canvas.delete(all)
                 #print(full_path)
                 #os.execv(__file__, sys.argv)
                 
-## Z.M. MOHIBUL ISLAM ID: 18-36427-1
+
 
 
 def creategrid():
@@ -251,8 +241,9 @@ _root_window.config(bg="black")
 _root_window.resizable(0,0)
 
 _canvas=tk.Canvas(_root_window,width=x_size*20,height=y_size*20)
-_canvas.tag_bind("rectangle_click", "<Button-1>" ,clicked)
+_canvas.tag_bind("rectangle_click", "<Key>" ,on_key_press)
 _canvas.tag_bind("rectangle_click", "<Button-3>" ,rightClicked)
+#_canvas.tag_bind("rectangle_click", "<Button-3>" ,rightClicked)
 _canvas.pack()
 
 
