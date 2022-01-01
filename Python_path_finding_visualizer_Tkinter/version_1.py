@@ -7,12 +7,7 @@
     #Left Clicking on the wall will trigger a message box exiting  the method as walls can not be paths
     #Left clicking without right clicking will through errror in console as the starting node is not defined
 
-#Group Members:
 
-    #Shahriar, Mohammad Fahim ID: 18-37258-1
-    #Bhuiyan, Md. Aminul Islam ID: 17-34531-2
-    #Antor , Hamid Ahmed ID: 18-36061-1
-    # Z.M. MOHIBUL ISLAM ID: 18-36427-1
 
 import tkinter as tk
 from tkinter import messagebox 
